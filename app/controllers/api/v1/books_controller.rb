@@ -7,7 +7,7 @@ module Api
       end
 
       def create
-        book = Book.new(book_params)
+        book = Book.new(book_params.merge(author_id: params[:book][:author_id]))
         if book.save
           render json: book, status: :created
         else
@@ -23,7 +23,7 @@ module Api
       private
 
       def book_params
-        params.require(:book).permit(:title, :author_id)
+        params.require(:book).permit(:title)
       end
     end
   end
