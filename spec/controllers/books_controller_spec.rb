@@ -8,4 +8,10 @@ RSpec.describe Api::V1::BooksController, type: :controller do
       expect(response).to be_successful
     end
   end
+  describe "POST #create" do
+    it "enqueues the update_sku job" do
+      expect(UpdateSkuJob).to receive(:perform_later).with("test")
+      post :create, params: { author: { first_name: "abc", last_name: "def", age: 10 }, book: { title: "test" } }
+    end
+  end
 end
