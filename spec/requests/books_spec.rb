@@ -11,7 +11,8 @@ describe "Books API", type: :request do
     it "returns all books" do
       get "/api/v1/books"
       expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body).size).to eq(2)
+      expect(response_body.size).to eq(2)
+      expect(response_body).to eq(BooksRepresenter.new(Book.all).as_json)
     end
   end
 
@@ -21,6 +22,7 @@ describe "Books API", type: :request do
         post "/api/v1/books", params: { book: { title: "Tender Is the Night", author_id: author.id } }
       }.to change(Book, :count).by(1)
       expect(response).to have_http_status(:created)
+      expect(response_body).to eq(BookRepresenter.new(Book.last).as_json)
     end
   end
 

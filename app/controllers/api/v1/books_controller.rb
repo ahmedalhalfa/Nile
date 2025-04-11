@@ -9,7 +9,7 @@ module Api
       def create
         book = Book.new(book_params.merge(author_id: params[:book][:author_id]))
         if book.save
-          render json: book, status: :created
+          render json: BookRepresenter.new(book).as_json, status: :created
         else
           render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
         end
