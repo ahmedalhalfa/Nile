@@ -8,11 +8,21 @@ describe "Books API", type: :request do
       FactoryBot.create(:book, title: "The Great Gatsby", author: author)
       FactoryBot.create(:book, title: "To Kill a Mockingbird", author: FactoryBot.create(:author, first_name: "Harper", last_name: "Lee", age: 89))
     end
+
     it "returns all books" do
       get "/api/v1/books"
       expect(response).to have_http_status(:success)
       expect(response_body.size).to eq(2)
       expect(response_body).to eq(BooksRepresenter.new(Book.all).as_json)
+    end
+
+    it "returns a subset of books based on pagination" do
+      expect(Book).to receive(:limit).with(1).and_call_original
+      expect(Book).to receive(:offset).with(1).and_call_original
+      get "/api/v1/books?limit=1&offset=1"
+      expect(response).to have_http_status(:success)
+      expect(response_body.size).to eq(1)
+      expect(response_body).to eq(BooksRepresenter.new([Book.offset(1).first]).as_json)
     end
   end
 
