@@ -22,7 +22,7 @@ describe "Books API", type: :request do
       get "/api/v1/books?limit=1&offset=1"
       expect(response).to have_http_status(:success)
       expect(response_body.size).to eq(1)
-      expect(response_body).to eq(BooksRepresenter.new([Book.offset(1).first]).as_json)
+      expect(response_body).to eq(BooksRepresenter.new([ Book.offset(1).first ]).as_json)
     end
   end
 

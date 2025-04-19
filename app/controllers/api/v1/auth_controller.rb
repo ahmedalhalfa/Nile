@@ -1,7 +1,7 @@
 module Api
   module V1
     class AuthController < ApplicationController
-      skip_before_action :authenticate_request, only: [:register, :login, :forgot_password, :reset_password]
+      skip_before_action :authenticate_request, only: [ :register, :login, :forgot_password, :reset_password ]
 
       # POST /api/v1/auth/register
       def register
@@ -84,7 +84,7 @@ module Api
         {
           id: user.id,
           email: user.email,
-          username: user.username,
+          username: user.username
         }
       end
     end

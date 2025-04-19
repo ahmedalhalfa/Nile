@@ -10,7 +10,7 @@ describe "Books API" do
     get "Retrieves a list of books" do
       tags "Books"
       produces "application/json"
-      security [bearerAuth: []]
+      security [ bearerAuth: [] ]
       parameter name: :limit, in: :query, type: :integer, description: "Maximum number of books to return", required: false
       parameter name: :offset, in: :query, type: :integer, description: "Number of books to skip", required: false
 
@@ -19,10 +19,10 @@ describe "Books API" do
                properties: {
                  books: {
                    type: :array,
-                   items: { "$ref" => "#/components/schemas/book" },
-                 },
+                   items: { "$ref" => "#/components/schemas/book" }
+                 }
                },
-               required: ["books"]
+               required: [ "books" ]
 
         context "when records exist" do
           let!(:books) { create_list(:book, 3, author: author) }
@@ -79,7 +79,7 @@ describe "Books API" do
       tags "Books"
       consumes "application/json"
       produces "application/json"
-      security [bearerAuth: []]
+      security [ bearerAuth: [] ]
       parameter name: :book, in: :body, schema: {
         type: :object,
         properties: {
@@ -87,12 +87,12 @@ describe "Books API" do
             type: :object,
             properties: {
               title: { type: :string },
-              author_id: { type: :integer },
+              author_id: { type: :integer }
             },
-            required: ["title", "author_id"],
-          },
+            required: [ "title", "author_id" ]
+          }
         },
-        required: ["book"],
+        required: [ "book" ]
       }
 
       response "201", "book created" do
@@ -165,7 +165,7 @@ describe "Books API" do
     get "Retrieves a book" do
       tags "Books"
       produces "application/json"
-      security [bearerAuth: []]
+      security [ bearerAuth: [] ]
 
       response "200", "book found" do
         schema "$ref" => "#/components/schemas/book"
@@ -221,7 +221,7 @@ describe "Books API" do
       tags "Books"
       consumes "application/json"
       produces "application/json"
-      security [bearerAuth: []]
+      security [ bearerAuth: [] ]
       parameter name: :book, in: :body, schema: {
         type: :object,
         properties: {
@@ -229,12 +229,12 @@ describe "Books API" do
             type: :object,
             properties: {
               title: { type: :string },
-              author_id: { type: :integer },
+              author_id: { type: :integer }
             },
-            required: ["title", "author_id"],
-          },
+            required: [ "title", "author_id" ]
+          }
         },
-        required: ["book"],
+        required: [ "book" ]
       }
 
       response "200", "book updated" do
@@ -325,7 +325,7 @@ describe "Books API" do
     delete "Deletes a book" do
       tags "Books"
       produces "application/json"
-      security [bearerAuth: []]
+      security [ bearerAuth: [] ]
 
       response "204", "book deleted" do
         context "when the book exists" do

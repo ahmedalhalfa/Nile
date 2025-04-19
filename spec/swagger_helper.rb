@@ -16,7 +16,7 @@ RSpec.configure do |config|
       openapi: "3.0.1",
       info: {
         title: "Nile API V1",
-        version: "v1",
+        version: "v1"
       },
       paths: {},
       servers: [
@@ -24,24 +24,24 @@ RSpec.configure do |config|
           url: "http://{defaultHost}",
           variables: {
             defaultHost: {
-              default: "localhost:3000",
-            },
-          },
-        },
+              default: "localhost:3000"
+            }
+          }
+        }
       ],
       components: {
         securitySchemes: {
           bearerAuth: {
             type: :http,
-            scheme: :bearer,
-          },
+            scheme: :bearer
+          }
         },
         schemas: {
           errors_object: {
             type: :object,
             properties: {
-              errors: { type: :array, items: { type: :string } },
-            },
+              errors: { type: :array, items: { type: :string } }
+            }
           },
           book: {
             type: :object,
@@ -49,13 +49,13 @@ RSpec.configure do |config|
               id: { type: :integer },
               title: { type: :string },
               author_name: { type: :string },
-              author_age: { type: :integer, nullable: true },
+              author_age: { type: :integer, nullable: true }
             },
-            required: ["id", "title", "author_name"],
-          },
-        },
-      },
-    },
+            required: [ "id", "title", "author_name" ]
+          }
+        }
+      }
+    }
   }
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.

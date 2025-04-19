@@ -12,9 +12,9 @@ describe "Authentication API" do
         properties: {
           email: { type: :string },
           username: { type: :string },
-          password: { type: :string },
+          password: { type: :string }
         },
-        required: ["email", "username", "password"],
+        required: [ "email", "username", "password" ]
       }
 
       response "201", "user created" do
@@ -26,12 +26,12 @@ describe "Authentication API" do
                    properties: {
                      id: { type: :integer },
                      email: { type: :string },
-                     username: { type: :string },
+                     username: { type: :string }
                    },
-                   required: ["id", "email", "username"],
-                 },
+                   required: [ "id", "email", "username" ]
+                 }
                },
-               required: ["token", "user"]
+               required: [ "token", "user" ]
 
         context "with valid parameters" do
           let(:user_params) { { email: "test@example.com", username: "testuser", password: "password123" } }
@@ -88,9 +88,9 @@ describe "Authentication API" do
         type: :object,
         properties: {
           email: { type: :string },
-          password: { type: :string },
+          password: { type: :string }
         },
-        required: ["email", "password"],
+        required: [ "email", "password" ]
       }
 
       let!(:existing_user) { create(:user, email: "login@example.com", password: "password123") }
@@ -104,12 +104,12 @@ describe "Authentication API" do
                    properties: {
                      id: { type: :integer },
                      email: { type: :string },
-                     username: { type: :string },
+                     username: { type: :string }
                    },
-                   required: ["id", "email", "username"],
-                 },
+                   required: [ "id", "email", "username" ]
+                 }
                },
-               required: ["token", "user"]
+               required: [ "token", "user" ]
 
         context "with valid credentials" do
           let(:credentials) { { email: existing_user.email, password: "password123" } }
@@ -154,9 +154,9 @@ describe "Authentication API" do
       parameter name: :email_param, in: :body, schema: {
         type: :object,
         properties: {
-          email: { type: :string },
+          email: { type: :string }
         },
-        required: ["email"],
+        required: [ "email" ]
       }, description: "Specify the user email to send reset instructions to"
 
       let!(:existing_user) { create(:user, email: "forgot@example.com") }
@@ -212,9 +212,9 @@ describe "Authentication API" do
         type: :object,
         properties: {
           token: { type: :string },
-          password: { type: :string },
+          password: { type: :string }
         },
-        required: ["token", "password"],
+        required: [ "token", "password" ]
       }
 
       let!(:user_with_token) { create(:user, :with_reset_token) }
@@ -306,14 +306,14 @@ describe "Authentication API" do
       tags "Authentication"
       consumes "application/json"
       produces "application/json"
-      security [bearerAuth: []]
+      security [ bearerAuth: [] ]
       parameter name: :password_change, in: :body, schema: {
         type: :object,
         properties: {
           current_password: { type: :string },
-          new_password: { type: :string },
+          new_password: { type: :string }
         },
-        required: ["current_password", "new_password"],
+        required: [ "current_password", "new_password" ]
       }
 
       let!(:current_user_instance) { create(:user, password: "oldpassword123") }

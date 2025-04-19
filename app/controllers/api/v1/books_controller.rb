@@ -58,7 +58,7 @@ module Api
       end
 
       def limit
-        [params.fetch(:limit, MAX_PER_PAGE).to_i, MAX_PER_PAGE].min
+        [ params.fetch(:limit, MAX_PER_PAGE).to_i, MAX_PER_PAGE ].min
       end
 
       def offset

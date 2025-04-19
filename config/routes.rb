@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
+  mount Rswag::Ui::Engine => "/api-docs"
+  mount Rswag::Api::Engine => "/api-docs"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       put "auth/change_password", to: "auth#change_password"
 
       # Resource routes
-      resources :books, only: [:index, :create, :destroy, :show, :update]
+      resources :books, only: [ :index, :create, :destroy, :show, :update ]
     end
   end
 end
