@@ -15,6 +15,13 @@ module Api
         render json: BooksRepresenter.new(books).as_json
       end
 
+      def show
+        book = Book.find(params[:id])
+        render json: BookRepresenter.new(book).as_json
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Book not found" }, status: :not_found
+      end
+
       def create
         book = Book.new(book_params.merge(author_id: params[:book][:author_id]))
 
@@ -25,6 +32,18 @@ module Api
         else
           render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
         end
+      end
+
+      def update
+        book = Book.find(params[:id])
+
+        if book.update(book_params.merge(author_id: params[:book][:author_id]))
+          render json: BookRepresenter.new(book).as_json
+        else
+          render json: { errors: book.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: "Book not found" }, status: :not_found
       end
 
       def destroy
